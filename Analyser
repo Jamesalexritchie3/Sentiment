@@ -3,7 +3,7 @@ dimensional_sentiment_dict = {
     "happy": {"valence": 0.8, "arousal": 0.7},
     "sad": {"valence": -0.6, "arousal": 0.4},
     "excited": {"valence": 0.9, "arousal": 0.9},
-    "bored": {"valence": -0.4, arousal": 0.1},
+    "bored": {"valence": -0.4, "arousal": 0.1},
     "angry": {"valence": -0.8, "arousal": 0.8},
 }
 
@@ -11,20 +11,20 @@ dimensional_sentiment_dict = {
 def analyze_sentiment(sentence):
     words = sentence.lower().split()
     total_valence = 0
-    total_excitation = 0
+    total_arousal = 0
     words_found = 0
 
     for word in words:
         if word in dimensional_sentiment_dict:
             sentiment = dimensional_sentiment_dict[word]
             total_valence += sentiment["valence"]
-            total_excitation += sentiment["excitation"]
+            total_arousal += sentiment["arousal"]
             words_found += 1
 
     if words_found > 0:
         average_valence = total_valence / words_found
-        average_excitation = total_excitation / words_found
-        return average_valence, average_excitation
+        average_arousal = total_arousal / words_found
+        return average_valence, average_arousal
     else:
         return None  # Indicates no sentiment words were found
 
@@ -40,8 +40,8 @@ def main():
 
         result = analyze_sentiment(sentence)
         if result:
-            valence, excitation = result
-            print(f"Valence: {valence:.2f}, Excitation: {excitation:.2f}")
+            valence, arousal = result
+            print(f"Valence: {valence:.2f}, arousal: {arousal:.2f}")
         else:
             print("No sentiment words found in the sentence.")
 
